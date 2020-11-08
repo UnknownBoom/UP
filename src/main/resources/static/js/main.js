@@ -1,20 +1,20 @@
 import App from 'pages/App.vue'
 import Vue from "vue"
-import Vuetify from "vuetify"
-import 'vuetify/dist/vuetify.min.css';
-import VueResource from 'vue-resource'
-import store from 'plugins/store.js'
+import vuetify  from "plugins/vuetify/Vuetify"
+import 'vuetify/dist/vuetify.min.css'
+import store from 'plugins/store/store.js'
+import router from "plugins/router/router";
+import 'core-js/stable';
+import 'regenerator-runtime/runtime';
+import 'plugins/validator/Validator.js'
 
 
-Vue.use(Vuetify)
-Vue.use(VueResource)
 
-
-const dbApi = Vue.resource('/card{/card_number}')
 new Vue({
     store,
+    router,
     el: '#app',
-    vuetify: new Vuetify(),
+    vuetify,
     render: a => a(App)
 })
 

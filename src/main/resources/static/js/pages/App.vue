@@ -5,27 +5,25 @@
                 <v-app-bar-nav-icon  app>HEll</v-app-bar-nav-icon>
                 <v-toolbar-title >Title</v-toolbar-title>
             </v-app-bar>
-            <v-content>
-                <card_table ></card_table>
-            </v-content>
+            <v-main>
+                <v-container fluid>
+                    <router-view></router-view>
+                </v-container>
+            </v-main>
+
         </v-parallax>
     </v-app>
 
 </template>
 
 <script>
-    import Card_table from "components/Card_table.vue";
     import {mapGetters} from "vuex"
     export default {
         name: "App",
-        components: {Card_table},
-        comments:{
-            Card_table
-        },
         data() {
             return {
             }
-        }
+        },
     }
 </script>
 
