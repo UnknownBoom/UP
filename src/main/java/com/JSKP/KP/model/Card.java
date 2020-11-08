@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Date;
 
 
@@ -33,6 +34,15 @@ public class Card {
 
     private String password;
 
+    private BigDecimal money;
+
+    public BigDecimal getMoney() {
+        return money;
+    }
+
+    public void setMoney(BigDecimal money) {
+        this.money = money;
+    }
 
 
     public String getNumber() {

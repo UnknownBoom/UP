@@ -193,11 +193,25 @@
                                             <ValidationProvider name="password" rules="required|digits:4" v-slot="{ errors, valid  }">
                                                 <v-text-field
                                                         v-model="editedItem.password"
-                                                        label="password"
+                                                        label="Пароль"
                                                         :success="valid"
                                                         :error-messages="errors"
-                                                        :counter="50"
+                                                        :counter="4"
                                                 ></v-text-field>
+                                            </ValidationProvider>
+                                        </v-col>
+                                        <v-col
+                                                cols="12"
+                                                sm="6"
+                                                md="4"
+                                        >
+                                            <ValidationProvider name="money" rules="required|max_value:999999999999|min_value:0" v-slot="{ errors, valid  }">
+                                                <v-text-field
+                                                        v-model="editedItem.money"
+                                                       :success="valid"
+                                                       :error-messages="errors"
+                                                        label="Деньги"
+                                                       ></v-text-field>
                                             </ValidationProvider>
                                         </v-col>
                                     </v-row>
@@ -266,15 +280,18 @@
 
 <script>
     import { ValidationObserver, ValidationProvider,extend  } from 'vee-validate'
-    import { required,digits,alpha,between,length,max,min,numeric } from 'vee-validate/dist/rules';
+    import { required,digits,alpha,between,length,max,min,numeric,max_value,min_value } from 'vee-validate/dist/rules';
+
 
     extend('required', required)
     extend('digits', digits)
     extend('alpha', alpha)
+    extend('max_value', max_value)
     extend('between', between)
     extend('length', length)
     extend('max', max)
     extend('min', min)
+    extend('min_value', min_value)
     extend('numeric', numeric)
 
 
@@ -287,6 +304,12 @@
             ValidationObserver,
         },
         data: () => ({
+            money: {
+                decimal: '.',
+                thousands: ',',
+                suffix: ' rub',
+                precision: 3,
+            },
             valid:false,
             menu1: false,
             menu2: false,
@@ -306,7 +329,8 @@
                 { text: 'Фамилия', value: 'owner_surname' },
                 { text: 'Отчество', value: 'owner_patronymic' },
                 { text: 'Cvv2', value: 'cvv2'},
-                { text: 'Password', value: 'password' },
+                { text: 'Пароль', value: 'password' },
+                { text: 'Деньги', value: 'money'},
                 { text: 'Actions', value: 'actions', sortable: false },
             ],
             editedIndex: -1,
@@ -319,6 +343,7 @@
                 owner_patronymic: '',
                 cvv2: '',
                 password: '',
+                money: 0,
             },
             defaultItem: {
                 number: '',
@@ -327,8 +352,9 @@
                 owner_name: '',
                 owner_surname: '',
                 owner_patronymic: '',
-                cvv2: 0,
+                cvv2: '',
                 password: '',
+                money: 0,
             },
         }),
 
@@ -421,6 +447,7 @@
                 return [year, month, day].join('-');
             }
         },
+
     }
 </script>
 
