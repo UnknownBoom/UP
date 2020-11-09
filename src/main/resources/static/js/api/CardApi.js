@@ -6,5 +6,6 @@ export default {
     add: card => cardResource.post('', card),
     update: card => cardResource.put('', card),
     remove: number => cardResource.delete(`/${number}`),
-    get: number =>cardResource.get(`/${number}`)
+    get: number =>cardResource.get(`/${number}`),
+    auth: card =>{return cardResource.post(`auth/${card.number}`,card)}
 }

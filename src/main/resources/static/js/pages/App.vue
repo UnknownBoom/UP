@@ -19,11 +19,14 @@
                         <v-list-item  @click="goToMain()">
                             <v-list-item-title>Главная страница</v-list-item-title>
                         </v-list-item>
-                        <v-list-item @click="goToBankomat()">
+                        <v-list-item v-if="current_card!=null && current_card!=undefined && current_card!=''" @click="goToBankomat()">
                             <v-list-item-title >Банкомат</v-list-item-title>
                         </v-list-item>
                         <v-list-item  @click="goToCards()">
                             <v-list-item-title>Все карты</v-list-item-title>
+                        </v-list-item>
+                        <v-list-item v-if="current_card==null || current_card==undefined || current_card==''" @click="goToAuth()">
+                            <v-list-item-title>Авторизация</v-list-item-title>
                         </v-list-item>
                     </v-list-item-group>
                 </v-list>
@@ -31,6 +34,12 @@
             < <v-app-bar app>
                 <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
                 <v-toolbar-title >Title</v-toolbar-title>
+            <v-spacer></v-spacer>
+            <div v-if="current_card!=null && current_card!=undefined && current_card!=''" class="pa-3" style="max-width: 300px">
+                номер карты: {{current_card.number}}
+            </div>
+            <v-btn v-if="current_card!=null && current_card!=undefined && current_card!=''" @click="logOut()">LogOut</v-btn>
+            <v-btn v-else @click="goToAuth()">Login</v-btn>
             </v-app-bar>
             <v-content>
                 <v-container fluid>
@@ -43,7 +52,8 @@
 </template>
 
 <script>
-    import {mapGetters} from "vuex"
+    import {mapGetters,mapActions} from "vuex"
+    import router from "../plugins/router/router";
     export default {
         name: "App",
         data() {
@@ -52,12 +62,16 @@
                 group: null,
             }
         },
+        computed:{
+            ...mapGetters(['current_card'])
+        },
         watch: {
             group () {
                 this.drawer = false
             },
         },
         methods:{
+            ...mapActions(['setCurrentCard']),
             goToCards(){
                 this.$router.push("/cards")
             },
@@ -66,6 +80,11 @@
             },
             goToBankomat(){
                 this.$router.push("/bankomat")
+            },
+            goToAuth(){this.$router.push("/authorization")},
+            logOut(){
+                this.setCurrentCard();
+                router.push({name:'authorization'})
             }
         }
     }

@@ -1,10 +1,12 @@
 package com.JSKP.KP.controller;
 
+import com.JSKP.KP.exception.BadRequest;
 import com.JSKP.KP.exception.NotFoundException;
 import com.JSKP.KP.model.Card;
 import com.JSKP.KP.service.Card_service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpClientErrorException;
 
 @RestController
 @RequestMapping("/card")
@@ -38,5 +40,19 @@ public class CardController {
     @DeleteMapping("{number}")
     public void deleteCards(@PathVariable("number")Card card){
         card_service.deleteCard(card);
+    }
+
+    @PostMapping("/auth/{number}")
+    public Card getAuthCards(@PathVariable("number") Card cardFromDb,@RequestBody Card card){
+        if(cardFromDb==null){
+            throw new NotFoundException();
+        }
+        if(cardFromDb.getNumber().equals(card.getNumber()) && cardFromDb.getPassword().equals(card.getPassword())){
+            return cardFromDb;
+        }
+        else{
+            throw new BadRequest();
+        }
+
     }
 }

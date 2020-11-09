@@ -3,7 +3,10 @@ import Vue from "vue"
 
 import cardResource from 'plugins/resource/CardResource.js'
 
+import createPersistedState from "vuex-persistedstate";
+
 import CardApi from "api/CardApi";
+import router from 'plugins/router/router'
 
 Vue.use(Vuex)
 
@@ -11,9 +14,15 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     state:{
         cards: [],
+        current_card:null,
     },
+    plugins: [createPersistedState()],
     getters:{
-        cards: state => state.cards
+        cards: state => state.cards,
+        current_card: state => state.current_card
+    },
+    setters:{
+        current_card: state => state.current_card
     },
     mutations:{
         setCards(state, cards){
@@ -34,8 +43,6 @@ export default new Vuex.Store({
             ]
         },
         deleteCardMutation(state,deleteIndex){
-            //const deleteIndex = state.cards.findIndex(item => item.number === card.number)
-            console.log("del")
 
             if (deleteIndex > -1) {
                 state.cards = [
@@ -43,6 +50,12 @@ export default new Vuex.Store({
                     ...state.cards.slice(deleteIndex + 1)
                 ]
             }
+        },
+        setCurrentCardMutation(state,card){
+            state.current_card = card;
+        },
+        updateCurrentCardMutation(state,card){
+            state.current_card = card;
         },
     },
 
@@ -61,11 +74,18 @@ export default new Vuex.Store({
                 commit("addCardMutation",data);
             }
         },
-        async updateCardAction({commit}, card) {
+        async updateCardAction({commit,state}, card) {
             const result = await CardApi.update(card)
             const data = await result.data
             commit('updateCardMutation', data)
-        },
+            if(state.current_card !=null && state.current_card !=undefined && state.current_card!=""){
+                if(state.current_card.number !=null && state.current_card.number !=undefined
+                    && state.current_card.number ==data.number){
+                    console.log('god')
+                    state.current_card = data
+                }
+            }
+                },
         async removeCardAction({commit,state}, index) {
              const number  = state.cards[index].number
             const result = await CardApi.remove(number)
@@ -73,5 +93,33 @@ export default new Vuex.Store({
                 commit('deleteCardMutation', index)
             }
         },
+        async authCardAction({commit}, card) {
+             try{
+                 const result = await CardApi.auth(card)
+                 const data = await result.data
+                 if (result.status == 200) {
+                     commit('setCurrentCardMutation', data)
+                     router.push('/bankomat')
+                 }else{
+                     router.push({
+                         name: 'authorization',
+                         query: { error: 'Неверные данные' }
+                     })
+                 }
+             }catch (e) {
+                 router.push({
+                     name: 'authorization',
+                     query: { error: 'Неверные данные' }
+                 })
+             }
+        },
+        async updateCurrentCardAction({commit,state}){
+             if(state.current_card!=null && state.current_card !=undefined && state.current_card!=""){
+                 const result = await CardApi.get(state.current_card.number)
+                 const data = await result.data
+                 commit("setCurrentCardMutation",data)
+             }
+
+        }
     }
 })
