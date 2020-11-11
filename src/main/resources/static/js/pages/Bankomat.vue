@@ -18,10 +18,13 @@
             ...mapGetters(['current_card'])
         },
         methods:{
+           ...mapActions(["getCardsFromServer"]),
         },
         beforeMount() {
             if(this.current_card==null || this.current_card == undefined && this.current_card!=""){
                 router.push({name:'authorization'})
+            }else {
+                this.getCardsFromServer();
             }
         }
     }
