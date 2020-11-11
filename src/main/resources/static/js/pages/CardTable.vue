@@ -3,11 +3,13 @@
             :headers="headers"
             :items="cards"
             sort-by="number"
+            dark
             class="elevation-1"
             :search="search"
+            style="background: linear-gradient(to right,rgba(72, 85, 99, 0.7), rgba(41, 50, 60, 0.7));"
     >
         <template v-slot:top>
-            <v-toolbar flat class="py-4" >
+            <v-toolbar flat class="py-4" style="background: rgba(75, 75, 75,0.7)">
                 <template>
                     <v-text-field
                             v-model="search"
@@ -22,9 +24,8 @@
                 >
                     <template v-slot:activator="{ on, attrs }">
                         <v-btn
-                                color="primary"
-                                dark
-                                class="mb-2"
+                                style="background: rgba(142, 158, 171, 0.8); "
+                                class="mb-5"
                                 v-bind="attrs"
                                 v-on="on"
                         >
