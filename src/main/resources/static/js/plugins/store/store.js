@@ -119,6 +119,26 @@ export default new Vuex.Store({
                  const data = await result.data
                  commit("setCurrentCardMutation",data)
              }
+        },
+        async addMoneyAction({commit,state},sum){
+             try{
+                 if(state.current_card!=null && state.current_card !=undefined && state.current_card!=""){
+                     const result = await CardApi.addMoney(state.current_card.number,sum)
+                     const data = await result.data
+                 }
+             }catch (e) {
+                 console.log(e)
+             }
+        },
+        async removeMoneyAction({commit,state},sum){
+            try{
+                if(state.current_card!=null && state.current_card !=undefined && state.current_card!=""){
+                    const result = await CardApi.removeMoney(state.current_card.number,sum)
+                    const data = await result.data
+                }
+            }catch (e) {
+                console.log(e)
+            }
 
         }
     }

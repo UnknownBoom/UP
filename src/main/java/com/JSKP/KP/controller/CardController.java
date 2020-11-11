@@ -42,17 +42,5 @@ public class CardController {
         card_service.deleteCard(card);
     }
 
-    @PostMapping("/auth/{number}")
-    public Card getAuthCards(@PathVariable("number") Card cardFromDb,@RequestBody Card card){
-        if(cardFromDb==null){
-            throw new NotFoundException();
-        }
-        if(cardFromDb.getNumber().equals(card.getNumber()) && cardFromDb.getPassword().equals(card.getPassword())){
-            return cardFromDb;
-        }
-        else{
-            throw new BadRequest();
-        }
 
-    }
 }
