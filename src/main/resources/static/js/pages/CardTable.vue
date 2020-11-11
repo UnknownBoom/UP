@@ -372,7 +372,6 @@
                 val || this.closeDelete()
             },
         },
-
         created () {
             this.initialize()
         },

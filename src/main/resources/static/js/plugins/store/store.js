@@ -114,10 +114,14 @@ export default new Vuex.Store({
              }
         },
         async updateCurrentCardAction({commit,state}){
+             try{
              if(state.current_card!=null && state.current_card !=undefined && state.current_card!=""){
                  const result = await CardApi.get(state.current_card.number)
                  const data = await result.data
                  commit("setCurrentCardMutation",data)
+                 return "Операция прошла успешно"
+             }}catch (e) {
+                 return "Ошибка при выполнении операции"
              }
         },
         async addMoneyAction({commit,state},sum){
@@ -125,9 +129,11 @@ export default new Vuex.Store({
                  if(state.current_card!=null && state.current_card !=undefined && state.current_card!=""){
                      const result = await CardApi.addMoney(state.current_card.number,sum)
                      const data = await result.data
+                     commit("setCurrentCardMutation",data)
+                     return "Операция прошла успешно"
                  }
              }catch (e) {
-                 console.log(e)
+                 return "Ошибка при выполнении операции"
              }
         },
         async removeMoneyAction({commit,state},sum){
@@ -135,11 +141,33 @@ export default new Vuex.Store({
                 if(state.current_card!=null && state.current_card !=undefined && state.current_card!=""){
                     const result = await CardApi.removeMoney(state.current_card.number,sum)
                     const data = await result.data
+                    commit("setCurrentCardMutation",data)
+                    return "Операция прошла успешно"
                 }
             }catch (e) {
-                console.log(e)
-            }
+                if(e.response.status==412){
+                    return "Недостаточно денег на счету"
+                }else {
+                    return "Ошибка при выполнении операции"
+                }
 
-        }
+            }
+        },
+        async transferMoneyAction({commit,state},{cardTo,sum}){
+            try{
+                if(state.current_card!=null && state.current_card !=undefined && state.current_card!=""){
+                    const result = await CardApi.transferMoney(state.current_card.number,cardTo,sum)
+                    const data = await result.data
+                    commit("setCurrentCardMutation",data)
+                    return "Операция прошла успешно"
+                }
+            }catch (e) {
+                if(e.response.status==412){
+                    return "Недостаточно денег на счету"
+                }else {
+                    return "Ошибка при выполнении операции"
+                }
+            }
+        },
     }
 })

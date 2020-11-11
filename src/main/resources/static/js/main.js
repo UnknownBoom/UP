@@ -9,7 +9,6 @@ import 'regenerator-runtime/runtime';
 import 'plugins/validator/Validator.js'
 
 
-
 new Vue({
     store,
     router,

@@ -1,19 +1,16 @@
 package com.JSKP.KP.controller;
 
-import com.JSKP.KP.exception.BadRequest;
-import com.JSKP.KP.exception.NotFoundException;
 import com.JSKP.KP.model.Card;
-import com.JSKP.KP.service.Card_service;
+import com.JSKP.KP.service.CardService;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.HttpClientErrorException;
 
 @RestController
 @RequestMapping("/card")
 public class CardController {
-    private final Card_service card_service;
+    private final CardService card_service;
 
-    public CardController(Card_service card_service) {
+    public CardController(CardService card_service) {
         this.card_service = card_service;
     }
 

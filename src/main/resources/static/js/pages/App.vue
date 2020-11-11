@@ -53,7 +53,7 @@
 
 <script>
     import {mapGetters,mapActions,mapMutations} from "vuex"
-    import router from "../plugins/router/router";
+    import router from "plugins/router/router";
     export default {
         name: "App",
         data() {

@@ -52,7 +52,7 @@
     import { extend, ValidationObserver, ValidationProvider, setInteractionMode } from 'vee-validate'
     import {mapActions,mapGetters} from "vuex"
     import cardApi from 'api/CardApi'
-    import router from "../plugins/router/router";
+    import router from "plugins/router/router";
     export default {
         components: {
             ValidationProvider,

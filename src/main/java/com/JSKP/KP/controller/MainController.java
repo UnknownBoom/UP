@@ -1,20 +1,17 @@
 package com.JSKP.KP.controller;
 
-import com.JSKP.KP.service.Card_service;
+import com.JSKP.KP.service.CardService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.*;
 
 @Controller
 @RequestMapping
 public class MainController {
-    private final Card_service card_service;
+    private final CardService card_service;
 
-    public MainController(Card_service card_service) {
+    public MainController(CardService card_service) {
         this.card_service = card_service;
     }
 

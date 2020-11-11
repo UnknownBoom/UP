@@ -1,16 +1,15 @@
 package com.JSKP.KP.model;
 
-import java.math.BigDecimal;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+@NoArgsConstructor
 public class MyBigDecimal {
     private BigDecimal decimal;
 
-
     public BigDecimal getDecimal() {
         return decimal;
-    }
-
-    public MyBigDecimal() {
     }
 
     public void setDecimal(BigDecimal decimal) {
