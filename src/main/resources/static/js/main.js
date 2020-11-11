@@ -14,6 +14,9 @@ new Vue({
     router,
     el: '#app',
     vuetify,
-    render: a => a(App)
+    render: a => a(App),
+    theme: {
+        options: { customProperties: true },
+    },
 })
 

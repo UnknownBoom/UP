@@ -13,11 +13,12 @@
                         v-bind="attrs"
                         v-on="on" outlined
                         @click="updateCardInfo()"
-                        align="center">
+                        align="center"
+                        style="background: linear-gradient(to right,rgba(142, 158, 171, 0.8), rgba(238, 242, 243, 0.8)); border-radius: 8px;border: 0px">
                     Баланс
                 </v-card>
             </template>
-            <v-card>
+            <v-card >
                 <v-card-title>
                     <span class="headline">Баланс</span>
                 </v-card-title>

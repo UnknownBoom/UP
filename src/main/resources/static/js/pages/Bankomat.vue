@@ -1,5 +1,5 @@
 <template>
-    <v-container class="grey lighten-5">
+    <v-container style="background: linear-gradient(to right,rgba(72, 85, 99, 0.9), rgba(41, 50, 60, 0.9)); border-radius: 8px">
         <bankomat-rows></bankomat-rows>
     </v-container>
 </template>

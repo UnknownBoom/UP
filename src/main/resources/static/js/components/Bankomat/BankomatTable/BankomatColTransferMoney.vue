@@ -15,7 +15,8 @@
                     <v-card class="pa-2 ma-4"
                             v-bind="attrs"
                             v-on="on" outlined
-                            align="center">
+                            align="center"
+                            style="background: linear-gradient(to right,rgba(142, 158, 171, 0.8), rgba(238, 242, 243, 0.8)); border-radius: 8px;border: 0px">
                         Перевести деньги
                     </v-card>
                 </template>

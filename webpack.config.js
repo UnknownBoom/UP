@@ -45,6 +45,17 @@ module.exports = {
                 loader: 'file-loader'
 
             },
+            {
+
+                test: /\.(png|svg|jpg|gif)$/,
+
+                use: [
+
+                    'file-loader',
+
+                ],
+
+            },
         ]
     },
     plugins: [
@@ -53,6 +64,7 @@ module.exports = {
     resolve: {
         modules: [
             path.join(__dirname, 'src', 'main', 'resources', 'static', 'js'),
+            path.join(__dirname, 'src', 'main', 'resources', 'static', 'image'),
             path.join(__dirname, 'node_modules'),
         ],
     }
