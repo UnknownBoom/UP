@@ -10,6 +10,7 @@
             <v-dialog
                     v-model="dialog"
                     max-width="600px"
+
             >
                 <template v-slot:activator="{ on, attrs }">
                     <v-card class="pa-2 ma-4"
@@ -20,7 +21,7 @@
                         Положить деньги
                     </v-card>
                 </template>
-                <v-card>
+                <v-card style="background: linear-gradient(90deg, rgba(142,158,171,0.8) 0%, rgba(238,242,243,0.8) 45%, rgba(142,158,171,0.8) 100%); border-radius: 8px;border: 0px">
                     <v-card-title>
                         <span class="headline">Положить деньги</span>
                     </v-card-title>
@@ -35,7 +36,7 @@
                                     <v-text-field
                                             label="Номер карты"
                                             :value="current_card.number"
-                                            disabled
+
                                             prepend-icon="mdi-card"
                                     ></v-text-field>
                                 </v-col>
@@ -52,6 +53,7 @@
                                                 label="Сумма внесения"
                                                 prefix="₽"
                                                 v-model="money"
+
                                                 :error-messages="errors"
                                         ></v-text-field>
                                     </validation-provider>

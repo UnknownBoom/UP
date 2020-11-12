@@ -32,7 +32,7 @@
                             New Item
                         </v-btn>
                     </template>
-                    <v-card>
+                    <v-card style="background: linear-gradient(90deg, rgba(142,158,171,0.95) 0%, rgba(238,242,243,0.95) 45%, rgba(142,158,171,0.95) 100%); border-radius: 8px;border: 0px">
                         <validation-observer
                                 ref="observer"
                                 v-slot="{ invalid}"
@@ -241,7 +241,7 @@
 
                 </v-dialog>
                 <v-dialog v-model="dialogDelete" max-width="500px">
-                    <v-card>
+                    <v-card style="background: linear-gradient(90deg, rgba(142,158,171,0.95) 0%, rgba(238,242,243,0.95) 45%, rgba(142,158,171,0.95) 100%); border-radius: 8px;border: 0px">
                         <v-card-title class="headline">Are you sure you want to delete this item?</v-card-title>
                         <v-card-actions>
                             <v-spacer></v-spacer>

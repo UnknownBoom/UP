@@ -20,7 +20,7 @@
                         Снять деньги
                     </v-card>
                 </template>
-                <v-card>
+                <v-card style="background: linear-gradient(90deg, rgba(142,158,171,0.8) 0%, rgba(238,242,243,0.8) 45%, rgba(142,158,171,0.8) 100%); border-radius: 8px;border: 0px">
                     <v-card-title>
                         <span class="headline">Снять деньги</span>
                     </v-card-title>
