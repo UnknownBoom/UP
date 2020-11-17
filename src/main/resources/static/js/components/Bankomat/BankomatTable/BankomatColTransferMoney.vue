@@ -45,7 +45,7 @@
                                     <validation-provider
                                             v-slot="{ errors }"
                                             name="Номер карты получателя"
-                                            :rules="'required|numeric|length:16'"
+                                            :rules="'required|numeric|length:16|notEquals:' + current_card.number"
                                     >
                                         <v-text-field
                                                 label="Номер карты получателя"
@@ -108,6 +108,10 @@
             return 'This value must be a positive number';
         }
     )
+    extend("notEquals",(v,a)=>{ if (v != a) {return true;}
+                return 'Номера не должны совпадать';
+            }
+        )
     export default {
         components:{
             ValidationProvider,
