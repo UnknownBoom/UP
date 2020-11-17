@@ -54,6 +54,7 @@ public class CardService {
     }
 
     public Card transferMoney(Card cardFrom,Card cardTo,BigDecimal transferSum){
+        if(cardFrom.getNumber() == cardTo.getNumber()) throw new BadRequest();
         isCorrectSum(transferSum);
         isEnoughMoney(cardFrom,transferSum);
         cardFrom.setMoney(cardFrom.getMoney().subtract(transferSum));
